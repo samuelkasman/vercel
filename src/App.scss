@@ -1,0 +1,175 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: white;
+
+  .wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    background: white;
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    display: flex;
+
+    .header {
+      position:absolute;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      background-color: black;
+      padding: 0;
+
+      img {
+        height: 40px;
+        margin: 0 20px;
+      }
+    }
+
+    section {
+      flex: none;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      scroll-snap-align: start;
+
+      .formWrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        padding-top: 70px;
+        padding-bottom: 10px;
+        
+        .inputWrapper {
+          flex-basis: 40%;
+          padding: 10px 0;
+          margin: 20px 0;
+
+          .hideInput {
+            display: none;
+          }
+
+          .inputLabel {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: 25px 5px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;            border-radius: 4px;
+
+            img {
+              width: 100px;
+            }
+
+            .persona {
+              line-height: 1.6rem;
+            }
+
+            .persona.name {
+              font-size: 2rem;
+              line-height: 3.2rem;
+            }
+          }
+
+          .active {
+            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+          }
+        }
+      }
+    }
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100vw;
+
+  .editor {
+    padding: 5rem 1rem 1rem;
+    display: flex;
+    width: 100%;
+
+    textarea.result {
+      flex: 1;
+      padding: 20px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      resize: none;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    }
+
+    .content {
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .sidebar {
+      padding: 1rem;
+      display: flex;
+      width: 20%;
+    }
+  }
+}
+
+.sendMessageWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+
+  input {
+    width: 100%;
+    padding: 0 20px;
+    margin-right: 20px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  }
+}
+
+.submit {
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  $color: black;
+  background: $color;
+  border: none;
+  color: white;
+  font-weight: 600;
+  display: inline-block;
+
+  &:hover {
+    background: lighten($color, 10%);
+    cursor: pointer;
+  }
+
+  &:active {
+    background: darken($color, 10%);
+  }
+}
