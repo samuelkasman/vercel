@@ -49,13 +49,21 @@ export const useApp = () => {
     }
   }, [persona]);
 
-  useEffect(() => {
+  const scrollToChatBottom = () => {
     const element = document.getElementById('chat-bottom');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [chat])
-  
+  }
+
+  useEffect(() => {
+    if (chat.length > 0) {
+      const element = document.getElementById('chat-bottom');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [chat]);
 
   const onPersonaChange = (e: any) => {
     setResult("");
@@ -264,6 +272,7 @@ export const useApp = () => {
     setPromptHistory(prompt_history);
     if (finalRes && finalRes !== "") {
       setChat(prev => ([...prev, finalRes.slice(2)]));
+      // scrollToChatBottom();
     }
     // console.log("full conversation:", prompt_history);
     setIsLoading(false);
@@ -272,6 +281,7 @@ export const useApp = () => {
   const handleSubmit = async () => {
     if (message && message !== "") {
       setChat(prev => ([...prev, message]));
+      // scrollToChatBottom();
     }
     setIsLoading(true);
     setMessage("");
@@ -292,6 +302,7 @@ export const useApp = () => {
     setPromptHistory((prev) => `${prev} \n ${finalRes}`);
     if (finalRes && finalRes !== "") {
       setChat(prev => ([...prev, finalRes.slice(2)]));
+      // scrollToChatBottom();
     }
     // console.log("full conversation:", promptHistory);
     setIsLoading(false);
