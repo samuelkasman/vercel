@@ -16,7 +16,7 @@ import { useApp } from "./useApp";
 function App() {
   const {
     persona,
-    result,
+    chat,
     setPrompt,
     message,
     setMessage,
@@ -172,12 +172,44 @@ function App() {
         <div className="container">
           <div className="editor">
             <div className="content">
-              <textarea
+              {/* <textarea
                 className="result"
                 placeholder=""
                 value={result}
                 readOnly
-              />
+              /> */}
+
+              <div className="chat">
+                {chat.map((message: string, index: number) => (
+                  <div key={index} className="chatMessage">
+                    <div className="chatImage">
+                      {index % 2 === 0 ? (
+                        <>
+                          <img src={trainer} alt="trainer" />
+                        </>
+                      ) : (
+                        <>
+                          {persona === Persona.Amanda && (
+                            <img src={amandaImg} alt="amanda" />
+                          )}
+                          {persona === Persona.Andreas && (
+                            <img src={andreasImg} alt="andreas" />
+                          )}
+                          {persona === Persona.Alina && (
+                            <img src={alinaImg} alt="alina" />
+                          )}
+                          {persona === Persona.Axel && (
+                            <img src={axelImg} alt="amanda" />
+                          )}
+                        </>
+                      )}
+                    </div>
+                    <div className="chatText">{message}</div>
+                  </div>
+                ))}
+                <div id="chat-bottom"></div>
+              </div>
+
               <div className="sendMessageWrapper">
                 <input
                   type="text"

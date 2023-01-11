@@ -135,12 +135,57 @@ body {
 
     textarea.result {
       flex: 1;
-      padding: 20px;
+      padding: 0;
       border: none;
       border-radius: 10px;
       outline: none;
       resize: none;
       box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    }
+
+    .chat {
+      flex: 1;
+      padding: 0;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      resize: none;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .chatMessage {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding: 30px 200px 30px 20px;
+        white-space: pre-wrap;
+
+        .chatImage {
+          height: 40px;
+          width: 40px;
+          background: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50px;
+          margin-right: 20px;
+        }
+
+        img {
+          height: 38px;
+          width: 38px;
+          border-radius: 50px;
+        }
+      }
+    
+      .chatMessage:nth-child(2n) {
+        color: white;
+        background: black;
+        padding: 30px 200px 30px 20px;
+      }
     }
 
     .content {
@@ -187,6 +232,7 @@ body {
   color: white;
   font-weight: 600;
   display: inline-block;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 
   &:hover {
     background: lighten($color, 10%);

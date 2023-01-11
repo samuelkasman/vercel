@@ -31,6 +31,7 @@ export const useApp = () => {
   const [result, setResult] = useState("");
   const [message, setMessage] = useState("");
   const [promptHistory, setPromptHistory] = useState("");
+  const [chat, setChat] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState<Options>({
     model: "text-davinci-003",
@@ -46,11 +47,19 @@ export const useApp = () => {
     if (persona && goal && !isLoading) {
       handleCreateProgram();
     }
-  }, [persona])
+  }, [persona]);
+
+  useEffect(() => {
+    const element = document.getElementById('chat-bottom');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chat])
   
 
   const onPersonaChange = (e: any) => {
     setResult("");
+    setChat([]);
     setPersona(e.target.value);
 
     if (e.target.value === Persona.Amanda) {
@@ -76,7 +85,6 @@ export const useApp = () => {
 
     const element = document.getElementById('section-2');
     if (element) {
-      // 👇 Will scroll smoothly to the top of the next section
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -249,17 +257,24 @@ export const useApp = () => {
       best_of: 1,
       max_tokens: 2048, // get longer answer
     });
-    prompt_history += (response6.data.choices[0].text || "");
+    const finalRes = response6.data.choices[0].text || "";
+    prompt_history += (finalRes);
 
-    setResult(response6.data.choices[0].text || "")
+    setResult(finalRes || "")
     setPromptHistory(prompt_history);
-    console.log("full conversation:", prompt_history);
+    if (finalRes && finalRes !== "") {
+      setChat(prev => ([...prev, finalRes.slice(2)]));
+    }
+    // console.log("full conversation:", prompt_history);
     setIsLoading(false);
   };
 
   const handleSubmit = async () => {
-    setMessage("");
+    if (message && message !== "") {
+      setChat(prev => ([...prev, message]));
+    }
     setIsLoading(true);
+    setMessage("");
     const response = await openai.createCompletion({
       prompt: `${promptHistory} \n ${prompt} `,
       echo: false, // do not echo previous conversation
@@ -271,10 +286,14 @@ export const useApp = () => {
       best_of: 1,
       max_tokens: 2048, // get longer answer
     });
+    const finalRes = response.data.choices[0].text || "";
 
-    setResult(response.data.choices[0].text || "");
-    setPromptHistory((prev) => `${prev} \n ${response.data.choices[0].text || ""}`);
-    console.log("full conversation:", promptHistory);
+    setResult(finalRes);
+    setPromptHistory((prev) => `${prev} \n ${finalRes}`);
+    if (finalRes && finalRes !== "") {
+      setChat(prev => ([...prev, finalRes.slice(2)]));
+    }
+    // console.log("full conversation:", promptHistory);
     setIsLoading(false);
   };
 
@@ -283,6 +302,7 @@ export const useApp = () => {
     prompt,
     setPrompt,
     result,
+    chat,
     setResult,
     message,
     setMessage,
