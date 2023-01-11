@@ -22,12 +22,14 @@ export const useApp = () => {
   ];
 
   const [persona, setPersona] = useState();
+  const [currentName, setCurrentName] = useState("");
   const [sources, setSources] = useState(
     new Array(sourcesArray.length).fill(false)
   );
   const [goal, setGoal] = useState<Goal>();
   const [prompt, setPrompt] = useState("");
   const [result, setResult] = useState("");
+  const [message, setMessage] = useState("");
   const [promptHistory, setPromptHistory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState<Options>({
@@ -48,23 +50,34 @@ export const useApp = () => {
   
 
   const onPersonaChange = (e: any) => {
+    setResult("");
     setPersona(e.target.value);
 
     if (e.target.value === Persona.Amanda) {
+      setCurrentName("Amanda");
       setSources([true, true, true, true]);
       setGoal(Goal.Marathon);
     }
     if (e.target.value === Persona.Andreas) {
+      setCurrentName("Andreas");
       setSources([false, true, true, false]);
       setGoal(Goal.Endurance);
     }
     if (e.target.value === Persona.Alina) {
+      setCurrentName("Alina");
       setSources([false, false, true, false]);
       setGoal(Goal.BMI);
     }
     if (e.target.value === Persona.Axel) {
+      setCurrentName("Axel");
       setSources([true, false, false, true]);
       setGoal(Goal.Muscle);
+    }
+
+    const element = document.getElementById('section-2');
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -222,9 +235,11 @@ export const useApp = () => {
     });
     prompt_history += (response5.data.choices[0].text || "");
 
+    const namePrompt = `Now greet me and address me by name ${currentName}. `;
+
     // Ask for the fitness plan
     const response6 = await openai.createCompletion({
-      prompt: PROMPT_NEW_LINE + PROMPT_TRAINING_PLAN,
+      prompt: PROMPT_NEW_LINE + namePrompt + PROMPT_TRAINING_PLAN,
       echo: false, // do not echo previous conversation
       model: "text-davinci-003",
       temperature: 0.7, // get nicer answer
@@ -243,11 +258,18 @@ export const useApp = () => {
   };
 
   const handleSubmit = async () => {
+    setMessage("");
     setIsLoading(true);
     const response = await openai.createCompletion({
-      prompt: `${promptHistory} \n\n ${prompt} `,
-      echo: false,
-      ...options,
+      prompt: `${promptHistory} \n ${prompt} `,
+      echo: false, // do not echo previous conversation
+      model: "text-davinci-003",
+      temperature: 0.7, // get nicer answer
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      best_of: 1,
+      max_tokens: 2048, // get longer answer
     });
 
     setResult(response.data.choices[0].text || "");
@@ -262,6 +284,8 @@ export const useApp = () => {
     setPrompt,
     result,
     setResult,
+    message,
+    setMessage,
     setOptions,
     isLoading,
     onPersonaChange,

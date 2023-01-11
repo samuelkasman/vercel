@@ -17,8 +17,9 @@ function App() {
   const {
     persona,
     result,
-    prompt,
     setPrompt,
+    message,
+    setMessage,
     isLoading,
     onPersonaChange,
     handleSubmit,
@@ -42,6 +43,7 @@ function App() {
               value="amanda"
               checked={persona === Persona.Amanda}
               onChange={onPersonaChange}
+              disabled={isLoading}
             />
             <label
               htmlFor="amanda"
@@ -58,6 +60,11 @@ function App() {
               <div className="persona dataSource">Smart watch data</div>
               <div className="persona goal">Wants to run a marathon</div>
             </label>
+            {persona === Persona.Amanda && (
+              <div className={`overlay ${isLoading ? "isLoading" : ""}`}>
+                <Loader />
+              </div>
+            )}
           </div>
 
           <div className="inputWrapper">
@@ -69,6 +76,7 @@ function App() {
               value="andreas"
               checked={persona === Persona.Andreas}
               onChange={onPersonaChange}
+              disabled={isLoading}
             />
             <label
               htmlFor="andreas"
@@ -85,6 +93,11 @@ function App() {
               <div className="persona dataSource">Smart scale data</div>
               <div className="persona goal">Wants to improve endurance</div>
             </label>
+            {persona === Persona.Andreas && (
+              <div className={`overlay ${isLoading ? "isLoading" : ""}`}>
+                <Loader />
+              </div>
+            )}
           </div>
 
           <div className="inputWrapper">
@@ -96,6 +109,7 @@ function App() {
               value="alina"
               checked={persona === Persona.Alina}
               onChange={onPersonaChange}
+              disabled={isLoading}
             />
             <label
               htmlFor="alina"
@@ -112,6 +126,11 @@ function App() {
               <div className="persona dataSource">Medical data</div>
               <div className="persona goal">Wants to improve BMI</div>
             </label>
+            {persona === Persona.Alina && (
+              <div className={`overlay ${isLoading ? "isLoading" : ""}`}>
+                <Loader />
+              </div>
+            )}
           </div>
 
           <div className="inputWrapper">
@@ -123,6 +142,7 @@ function App() {
               value="axel"
               checked={persona === Persona.Axel}
               onChange={onPersonaChange}
+              disabled={isLoading}
             />
             <label
               htmlFor="axel"
@@ -139,11 +159,16 @@ function App() {
               <div className="persona dataSource">Tracker app data</div>
               <div className="persona goal">Wants to gain muscle</div>
             </label>
+            {persona === Persona.Axel && (
+              <div className={`overlay ${isLoading ? "isLoading" : ""}`}>
+                <Loader />
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      <section>
+      <section id="section-2">
         <div className="container">
           <div className="editor">
             <div className="content">
@@ -152,14 +177,17 @@ function App() {
                 placeholder=""
                 value={result}
                 readOnly
-                // onChange={(e) => setPrompt(e.target.value)}
               />
               <div className="sendMessageWrapper">
                 <input
                   type="text"
                   className="message"
                   placeholder=""
-                  onChange={(e) => setPrompt(e.target.value)}
+                  value={message}
+                  onChange={(e) => {
+                    setPrompt(e.target.value);
+                    setMessage(e.target.value);
+                  }}
                 />
                 <button
                   disabled={isLoading}

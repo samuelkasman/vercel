@@ -13,4 +13,4 @@ export const PROMPT_SAFETY = " Do not generate or extend my questions or answers
 
 export const PROMPT_NEW_LINE = " \n ";
 
-export const PROMPT_TRAINING_PLAN = "Now greet me by my name. Show me the precise daily instructions for a weekly fitness training program. Start with Monday and give instructions for the whole week. Add some tips and encouragement at the end. ";
+export const PROMPT_TRAINING_PLAN = "Show me the precise daily instructions for a weekly fitness training program. Start with Monday and give instructions for the whole week. Add some tips and encouragement at the end. ";

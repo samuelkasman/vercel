@@ -8,5 +8,3 @@
 2. add the openai api key to the `.env` file to the `REACT_APP_OPEN_AI_TOKEN` variable
 3. run the app with `yarn start`
 
-# vercel
-# vercel
