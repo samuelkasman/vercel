@@ -214,7 +214,7 @@ function App() {
                 <input
                   type="text"
                   className="message"
-                  placeholder=""
+                  placeholder="Refine your training program by chatting with the trainer here"
                   value={message}
                   onChange={(e) => {
                     setPrompt(e.target.value);
