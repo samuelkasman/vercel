@@ -47,6 +47,7 @@ export const useApp = () => {
     if (persona && goal && !isLoading) {
       handleCreateProgram();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persona]);
 
   // const scrollToChatBottom = () => {
