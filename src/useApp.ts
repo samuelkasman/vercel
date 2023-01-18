@@ -49,12 +49,12 @@ export const useApp = () => {
     }
   }, [persona]);
 
-  const scrollToChatBottom = () => {
-    const element = document.getElementById('chat-bottom');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+  // const scrollToChatBottom = () => {
+  //   const element = document.getElementById('chat-bottom');
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }
 
   useEffect(() => {
     if (chat.length > 0) {
