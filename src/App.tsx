@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="wrapper">
       <div className="header">
-        <img src={onrunning} alt="trainer" />
+        <img src={onrunning} alt="onrunning" />
         <img src={creativedock} alt="creativedock" />
       </div>
 
@@ -185,7 +185,7 @@ function App() {
                     <div className="chatImage">
                       {index % 2 === 0 ? (
                         <>
-                          <img src={onrunning} alt="trainer" />
+                          <img src={onrunning} alt="onrunning" />
                         </>
                       ) : (
                         <>
