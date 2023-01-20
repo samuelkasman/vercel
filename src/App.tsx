@@ -10,8 +10,8 @@ import alinaImg from "./img/alina.png";
 import { axel } from "./personas/axel";
 import axelImg from "./img/axel.png";
 import creativedock from "./img/creativedock.png";
-import trainer from "./img/trainer.png";
 import { useApp } from "./useApp";
+import logo from "./img/logo192.png";
 
 function App() {
   const {
@@ -28,7 +28,6 @@ function App() {
   return (
     <div className="wrapper">
       <div className="header">
-        <img src={trainer} alt="trainer" />
         <img src={creativedock} alt="creativedock" />
       </div>
 
@@ -185,7 +184,7 @@ function App() {
                     <div className="chatImage">
                       {index % 2 === 0 ? (
                         <>
-                          <img src={trainer} alt="trainer" />
+                          <img src={logo} alt="logo" />
                         </>
                       ) : (
                         <>
